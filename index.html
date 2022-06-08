@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search tags</title>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <h3 class="header">Search Tags</h3>
+        <div class="body">
+            <ul class="search__list">
+            </ul>
+            <input class="form-input" type="text" placeholder="Type and Enter"/>
+        </div>
+        <button type="button" class="remove-btn">Remove All</button>
+    </div>
+    <script type="text/javascript">
+        const searchList= document.querySelector('.search__list')
+        const input = document.querySelector('.form-input')
+        const removeBtn= document.querySelector('.remove-btn')
+
+        let tags=[ 'nodejs', 'reactjs']
+
+        function render() {
+            const html= tags.map((tag,i)=> `<li class= "search__item">
+                    <span>${tag}</span>
+                    <i class="fa-solid fa-xmark" onClick= removeTag(${i}) ></i>
+                    </li>`).join('')
+            searchList.innerHTML= html
+        }
+        function removeTag (index){
+            tags.splice(index, 1)
+            render()
+        }
+        removeBtn.addEventListener('click',()=>{
+            tags=[]
+            render()
+        })
+
+        input.addEventListener('keydown' ,(e) => {
+            if(e.key==='Enter'){
+                tags.push(e.target.value)
+                render()
+                e.target.value=''
+            }
+        })
+
+    </script>
+</body>
+</html>
